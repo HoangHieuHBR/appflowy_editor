@@ -74,7 +74,10 @@ class SelectionMenu extends SelectionMenuService {
     dismiss();
 
     final selectionService = editorState.service.selectionService;
-    final selectionRects = selectionService.selectionRects;
+    // final selectionRects = selectionService.selectionRects;
+    
+    // use the editorState.selectionRects() method to get the selectionRects for show Slash menu on mobile
+    final selectionRects = editorState.selectionRects();
     if (selectionRects.isEmpty) {
       return;
     }

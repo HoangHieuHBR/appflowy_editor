@@ -48,5 +48,17 @@ Future<void> onNonTextUpdate(
         ),
       );
     }
+  } else {
+    //Fix bug lost selection on large devices
+    if (selection != null &&
+        nonTextUpdate.composing == TextRange.empty &&
+        nonTextUpdate.selection.isCollapsed) {
+      editorState.selection = Selection.collapsed(
+        Position(
+          path: selection.start.path,
+          offset: nonTextUpdate.selection.start,
+        ),
+      );
+    }
   }
 }

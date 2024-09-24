@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:appflowy_editor/appflowy_editor.dart';
-import 'package:appflowy_editor/src/editor/util/platform_extension.dart';
+// import 'package:appflowy_editor/src/editor/util/platform_extension.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -56,9 +56,9 @@ Future<bool> _showSlashMenu(
   bool singleColumn = true,
   SelectionMenuStyle style = SelectionMenuStyle.light,
 }) async {
-  if (PlatformExtension.isMobile) {
-    return false;
-  }
+  // if (PlatformExtension.isMobile) {
+  //   return false;
+  // }
 
   final selection = editorState.selection;
   if (selection == null) {
