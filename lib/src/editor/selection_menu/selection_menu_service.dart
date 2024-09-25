@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/material.dart';
 
+import '../util/platform_extension.dart';
+
 abstract class SelectionMenuService {
   Offset get offset;
   Alignment get alignment;
@@ -75,9 +77,15 @@ class SelectionMenu extends SelectionMenuService {
 
     final selectionService = editorState.service.selectionService;
     // final selectionRects = selectionService.selectionRects;
-    
+
     // use the editorState.selectionRects() method to get the selectionRects for show Slash menu on mobile
     final selectionRects = editorState.selectionRects();
+    print(
+      "selectionRects from editorState function: ${editorState.selectionRects()}",
+    );
+    print(
+      "selectionRects from editorState logic: ${selectionService.selectionRects}",
+    );
     if (selectionRects.isEmpty) {
       return;
     }
@@ -203,7 +211,7 @@ class SelectionMenu extends SelectionMenuService {
     // Workaround: We can customize the padding through the [EditorStyle],
     // but the coordinates of overlay are not properly converted currently.
     // Just subtract the padding here as a result.
-    const menuHeight = 200.0;
+    var menuHeight = (PlatformExtension.isMobile) ? 100.0 : 200.0;
     const menuOffset = Offset(0, 10);
     final editorOffset =
         editorState.renderBox?.localToGlobal(Offset.zero) ?? Offset.zero;
