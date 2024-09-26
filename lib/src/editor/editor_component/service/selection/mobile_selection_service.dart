@@ -299,6 +299,7 @@ class _MobileSelectionServiceWidgetState
 
   @override
   void updateSelection(Selection? selection) {
+    print("Run updateSelection mobile $selection");
     if (currentSelection.value == selection) {
       return;
     }
@@ -386,6 +387,9 @@ class _MobileSelectionServiceWidgetState
 
   void _updateSelection() {
     final selection = editorState.selection;
+
+    print(" selection: $selection");
+    print("current selection: ${currentSelection.value}");
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       selectionNotifierAfterLayout.value = selection;

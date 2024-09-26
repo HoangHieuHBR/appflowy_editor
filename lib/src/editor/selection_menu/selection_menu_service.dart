@@ -80,12 +80,6 @@ class SelectionMenu extends SelectionMenuService {
 
     // use the editorState.selectionRects() method to get the selectionRects for show Slash menu on mobile
     final selectionRects = editorState.selectionRects();
-    print(
-      "selectionRects from editorState function: ${editorState.selectionRects()}",
-    );
-    print(
-      "selectionRects from editorState logic: ${selectionService.selectionRects}",
-    );
     if (selectionRects.isEmpty) {
       return;
     }

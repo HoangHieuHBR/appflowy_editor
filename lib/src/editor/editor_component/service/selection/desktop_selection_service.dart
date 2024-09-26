@@ -106,6 +106,7 @@ class _DesktopSelectionServiceWidgetState
 
   @override
   void updateSelection(Selection? selection) {
+    print("Run updateSelection desktop $selection");
     currentSelection.value = selection;
     editorState.updateSelectionWithReason(
       selection,

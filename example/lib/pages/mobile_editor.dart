@@ -1,6 +1,9 @@
 import 'package:appflowy_editor/appflowy_editor.dart';
+import 'package:example/plugins/mention_overlay/mention_overlay_service.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../plugins/mention_overlay/mention_overlay_command.dart';
 
 class MobileEditor extends StatefulWidget {
   const MobileEditor({
@@ -23,6 +26,68 @@ class _MobileEditorState extends State<MobileEditor> {
 
   late EditorStyle editorStyle;
   late Map<String, BlockComponentBuilder> blockComponentBuilders;
+
+  late final MentionOverlayService mentionOverlayService =
+      MentionOverlayService(
+    context: context,
+    handlers: [
+      // InlinePageReferenceService(currentViewId: documentBloc.documentId),
+      // DateReferenceService(context),
+      // ReminderReferenceService(context),
+    ],
+  );
+
+  List<CharacterShortcutEvent> get characterShortcutEvents => [
+        // // code block
+        // formatBacktickToCodeBlock,
+        // ...codeBlockCharacterEvents,
+
+        // // callout block
+        // insertNewLineInCalloutBlock,
+
+        // // quote block
+        // insertNewLineInQuoteBlock,
+
+        // // toggle list
+        // formatGreaterToToggleList,
+        // insertChildNodeInsideToggleList,
+
+        // customize the slash menu command
+        // customSlashCommand(
+        //   slashMenuItems,
+        //   style: styleCustomizer.selectionMenuStyleBuilder(),
+        // ),
+
+        // customFormatGreaterEqual,
+
+        ...standardCharacterShortcutEvents
+          ..removeWhere(
+            (shortcut) => [
+              slashCommand, // Remove default slash command
+              formatGreaterEqual, // Overridden by customFormatGreaterEqual
+            ].contains(shortcut),
+          ),
+
+        mentionOverlayCommand(
+          mentionOverlayService,
+          // style: styleCustomizer.inlineActionsMenuStyleBuilder(),
+        ),
+
+        // /// Inline page menu
+        // /// - Using `[[`
+        // pageReferenceShortcutBrackets(
+        //   context,
+        //   documentBloc.documentId,
+        //   styleCustomizer.inlineActionsMenuStyleBuilder(),
+        // ),
+
+        // /// - Using `+`
+        // pageReferenceShortcutPlusSign(
+        //   context,
+        //   documentBloc.documentId,
+        //   styleCustomizer.inlineActionsMenuStyleBuilder(),
+        // ),
+      ];
 
   @override
   void initState() {
@@ -86,6 +151,8 @@ class _MobileEditorState extends State<MobileEditor> {
               child: AppFlowyEditor(
                 editorStyle: editorStyle,
                 editorState: editorState,
+                // customize the shortcuts
+                characterShortcutEvents: characterShortcutEvents,
                 editorScrollController: editorScrollController,
                 blockComponentBuilders: blockComponentBuilders,
                 showMagnifier: true,
