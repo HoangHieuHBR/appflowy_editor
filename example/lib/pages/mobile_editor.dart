@@ -151,8 +151,8 @@ class _MobileEditorState extends State<MobileEditor> {
               child: AppFlowyEditor(
                 editorStyle: editorStyle,
                 editorState: editorState,
-                // customize the shortcuts
-                characterShortcutEvents: characterShortcutEvents,
+                // // customize the shortcuts
+                // characterShortcutEvents: characterShortcutEvents,
                 editorScrollController: editorScrollController,
                 blockComponentBuilders: blockComponentBuilders,
                 showMagnifier: true,

@@ -6,6 +6,8 @@ import 'package:example/pages/mobile_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:universal_platform/universal_platform.dart';
 
+import 'widgets/mobile_selection_wrapper.dart';
+
 class Editor extends StatefulWidget {
   const Editor({
     super.key,
@@ -116,7 +118,10 @@ class _EditorState extends State<Editor> {
                     textDirection: widget.textDirection,
                   );
                 } else if (UniversalPlatform.isMobile) {
-                  return MobileEditor(editorState: editorState!);
+                  return MobileSelectionWrapper(
+                    editorState: editorState!,
+                    child: MobileEditor(editorState: editorState!),
+                  );
                 }
               }
 

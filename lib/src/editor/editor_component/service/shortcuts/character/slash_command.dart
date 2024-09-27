@@ -5,6 +5,8 @@ import 'package:appflowy_editor/appflowy_editor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../util/platform_extension.dart';
+
 /// Show the slash menu
 ///
 /// - support
@@ -56,9 +58,9 @@ Future<bool> _showSlashMenu(
   bool singleColumn = true,
   SelectionMenuStyle style = SelectionMenuStyle.light,
 }) async {
-  // if (PlatformExtension.isMobile) {
-  //   return false;
-  // }
+  if (PlatformExtension.isMobile) {
+    return false;
+  }
 
   final selection = editorState.selection;
   if (selection == null) {
